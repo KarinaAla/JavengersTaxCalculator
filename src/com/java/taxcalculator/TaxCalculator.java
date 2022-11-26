@@ -28,18 +28,30 @@ public class TaxCalculator {
 
         System.out.println("Are you a full-time student in college/university? (Yes/No)");
         String student=sc.nextLine();
+        //if we going to use tuition in future, we should initialize it here, other way we won't be able to access
+        double tuition =0;
         if(student.equalsIgnoreCase(positive)) {
             System.out.println("Enter the annual tuition fee:");
-            double tuition=sc.nextDouble();
+            tuition=sc.nextDouble();
         }
 
-        System.out.println("Please write your status:");
-        String status = sc.next();
-        System.out.println("Do you have children? (Yes or No):");
-        int kids = sc.nextInt();
-        System.out.println("How old your kids are: ");
-        int dependents = sc.nextInt();
-        System.out.println("Please enter the number of dependents: ");
+        System.out.println("Please write your status:"); //we should specify what kind of status
+        String status = sc.nextLine(); //probably better use nextLine();
+        System.out.println("Do you have children under 18? (Yes or No):"); //yes or no question, but the answer is int
+        String hasKids = sc.nextLine();
+        int kids =0;
+        if(hasKids.equalsIgnoreCase(positive)){ 
+              kids = sc.nextInt(); 
+        }    
+        //int kids = sc.nextInt();      
+        //System.out.println("How old your kids are: "); //don't really need this
+        System.out.println("Do you have any dependents? (Yes or No): ");
+        String hasDependents = sc.nextLine();
+        int dependents = 0;
+        if(hasDependents.equalsIgnoreCase(positive)){
+            System.out.println("Please enter the number of dependents: ");
+            dependents = sc.nextInt();
+        }
         printLineWithSpace();
     }
 
