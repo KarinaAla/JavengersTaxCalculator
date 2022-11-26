@@ -3,6 +3,8 @@ import java.util.Scanner;
 public class TaxCalculator {
     public static void main(String[] args) {
         Scanner sc=new Scanner(System.in);
+        System.out.println("Welcome to Tax Calculator");
+        System.out.println("Please fill the following steps to continue!");
         String positive="Yes";
 
         System.out.println("Enter your full name:");
@@ -30,6 +32,14 @@ public class TaxCalculator {
             System.out.println("Enter the annual tuition fee:");
             double tuition=sc.nextDouble();
         }
+
+        System.out.println("Please write your status:");
+        String status = sc.next();
+        System.out.println("Do you have children? (Yes or No):");
+        int kids = sc.nextInt();
+        System.out.println("How old your kids are: ");
+        int ageOfChild = sc.nextInt();
+        System.out.println("Please enter the number of dependents: ");
         printLineWithSpace();
     }
 
