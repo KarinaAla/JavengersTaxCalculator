@@ -1,0 +1,39 @@
+package com.java.taxcalculator;
+import java.util.Scanner;
+public class TaxCalculator {
+    public static void main(String[] args) {
+        Scanner sc=new Scanner(System.in);
+        String positive="Yes";
+
+        System.out.println("Enter your full name:");
+        String name=sc.nextLine();
+        printLineWithSpace();
+
+        System.out.println("Enter your address:");
+        String address=sc.nextLine();
+        printLineWithSpace();
+
+        System.out.println("Enter your tax ID:");
+        String taxID=sc.nextLine();
+        printLineWithSpace();
+
+        System.out.println("Are you an active duty military member? (Yes/No)");
+        String militaryMember = sc.nextLine();
+        if(militaryMember.equalsIgnoreCase(positive)){
+            System.out.println("!! Please include your Military Tax Exemption Certificate. !!");
+        }
+        printLineWithSpace();
+
+        System.out.println("Are you a full-time student in college/university? (Yes/No)");
+        String student=sc.nextLine();
+        if(student.equalsIgnoreCase(positive)) {
+            System.out.println("Enter the annual tuition fee:");
+            double tuition=sc.nextDouble();
+        }
+        printLineWithSpace();
+    }
+
+    static void printLineWithSpace(){
+        System.out.println(" ");
+    }
+}
