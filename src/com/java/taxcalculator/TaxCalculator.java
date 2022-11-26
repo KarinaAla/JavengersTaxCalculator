@@ -38,7 +38,7 @@ public class TaxCalculator {
         System.out.println("Do you have children? (Yes or No):");
         int kids = sc.nextInt();
         System.out.println("How old your kids are: ");
-        int ageOfChild = sc.nextInt();
+        int dependents = sc.nextInt();
         System.out.println("Please enter the number of dependents: ");
         printLineWithSpace();
     }
