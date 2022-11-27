@@ -35,16 +35,15 @@ public class TaxCalculator {
             tuition=sc.nextDouble();
         }
 
-        System.out.println("Please write your status:"); //we should specify what kind of status
-        String status = sc.nextLine(); //probably better use nextLine();
-        System.out.println("Do you have children under 18? (Yes or No):"); //yes or no question, but the answer is int
+        System.out.println("Please write your marital status:"); 
+        String status = sc.nextLine(); 
+        System.out.println("Do you have children under 18? (Yes or No):"); 
         String hasKids = sc.nextLine();
         int kids =0;
-        if(hasKids.equalsIgnoreCase(positive)){ 
+        if(hasKids.equalsIgnoreCase(positive)){
+              System.out.println("Please enter the number of kids:");
               kids = sc.nextInt(); 
         }    
-        //int kids = sc.nextInt();      
-        //System.out.println("How old your kids are: "); //don't really need this
         System.out.println("Do you have any dependents? (Yes or No): ");
         String hasDependents = sc.nextLine();
         int dependents = 0;
