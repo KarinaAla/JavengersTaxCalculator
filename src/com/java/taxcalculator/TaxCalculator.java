@@ -170,8 +170,8 @@ public class TaxCalculator {
             }
         }
         printLineWithSpace();
-
-        System.out.println("Based on your marital status and income your Tax Rate is: " + (int) (taxRate * 100) + "%");
+        taxRate-=Persentage(kids);
+        System.out.println("Based on your marital status and income, your Tax Rate is " + (int) (taxRate * 100) + "%");
         return taxRate;
     }
     static void paidTaxes(double income, double taxRate, String isStudent, double tuition) {
@@ -183,7 +183,7 @@ public class TaxCalculator {
             reimbursement = tuition;
             afterPayingTaxes += reimbursement;
         }
-        System.out.println("Taxes paid = $" + taxesPaid);
+        System.out.println("\nTaxes paid = $" + taxesPaid);
         System.out.println("Your reimbursement = $" + reimbursement);
         System.out.println("Total kept income = $" + afterPayingTaxes);
     }
@@ -191,46 +191,11 @@ public class TaxCalculator {
     static void printLineWithSpace() {
         System.out.println(" ");
     }
-    /*       double newIncome = 0.0;
-        String secondIncome = "";
-        String empTaxID = "";
-        double second = 0.0;
-        double newIncome = 0.0;
-        String employer = "";
 
-        System.out.println("Please enter your income for the year of 2022");
-        income = sc.nextDouble();
-
-        printLineWithSpace();
-
-        System.out.println("Please enter the name of your employer: ");
-        employer = sc.next();
-
-        printLineWithSpace();
-
-        System.out.println("Please enter your employer's tax ID number: ");
-        empTaxID = sc.next();
-
-        printLineWithSpace();
-
-        System.out.println("Do you have another job/source of income?");
-        secondIncome = sc.next();
-        if (secondIncome.equalsIgnoreCase(positive)) {
-            printLineWithSpace();
-            System.out.println("Enter your additional income for the year of 2022");
-            second = sc.nextDouble();
-        }
-        newIncome = second + income;
-*/
-
-
-static void Persentage() {
-    System.out.println("Please enter the number of kids:");
-    Scanner sc = new Scanner(System.in);
-    int kids = sc.nextInt();
-    double sum= 100 - kids *0.5;
-
-    System.out.println("You have to pay "+ sum + " % of the whole amount");
-}
+    static double Persentage(int kids) {
+        double persentage = kids*0.005;
+        System.out.println("Based on the number of kids you have, your tax \"discount\" is "+ (int)(persentage*100)+ "%");
+        return persentage;
+    }
 
 }
