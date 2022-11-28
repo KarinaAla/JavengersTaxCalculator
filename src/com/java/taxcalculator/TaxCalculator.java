@@ -4,11 +4,11 @@ public class TaxCalculator {
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
-        System.out.println("Welcome to Tax Calculator");
-        System.out.println("Please fill the following steps to continue!");
-        String positive = "Yes";
-        String negative = "No";
-        double taxRate = 0.0;
+        System.out.println("\t\t\tWelcome to Tax Calculator");
+        System.out.println("\tPlease fill the following steps to continue!");
+        System.out.println("\t--------------------------------------------");
+        String positive = "yes";
+        String negative = "no";
 
         System.out.println("Enter your full name:");
         String name = sc.nextLine();
@@ -31,68 +31,69 @@ public class TaxCalculator {
 
         System.out.println("Are you a full-time student in college/university? (Yes/No)");
         String student = sc.nextLine();
-        //if we going to use tuition in future, we should initialize it here, other way we won't be able to access
-        double tuition = 0;
+        double tuition = 0.0;
         if (student.equalsIgnoreCase(positive)) {
             System.out.println("Enter the annual tuition fee:");
             tuition = sc.nextDouble();
+            sc.nextLine();
         }
 
-        System.out.println("Are you filing as single? (Yes or No):");
+        printLineWithSpace();
+        System.out.println("Are you filing as single? (Yes/No):");
         String status = sc.nextLine();
-        System.out.println("Do you have children under 18? (Yes or No):");
+        printLineWithSpace();
+        System.out.println("Do you have children under 18? (Yes/No):");
         String hasKids = sc.nextLine();
         int kids = 0;
         if (hasKids.equalsIgnoreCase(positive)) {
             System.out.println("Please enter the number of kids:");
             kids = sc.nextInt();
+            sc.nextLine();
         }
-        System.out.println("Do you have any dependents? (Yes or No): ");
+
+        printLineWithSpace();
+        System.out.println("Do you have any dependents? (Yes/No): ");
         String hasDependents = sc.nextLine();
         int dependents = 0;
         if (hasDependents.equalsIgnoreCase(positive)) {
             System.out.println("Please enter the number of dependents: ");
             dependents = sc.nextInt();
+            sc.nextLine();
         }
+
         printLineWithSpace();
-
-        double income = 0.0;
-        String secondIncome = "";
-        String empTaxID = "";
-        double second = 0.0;
-        double newIncome = 0.0;
-        String employer = "";
-
-        System.out.println("Please enter your income for the year of 2022");
-        income = sc.nextDouble();
+        double newIncome= calculateIncome(sc);
 
         printLineWithSpace();
 
-        System.out.println("Please enter the name of your employer: ");
-        employer = sc.next();
-
-        printLineWithSpace();
-
-        System.out.println("Please enter your employer's tax ID number: ");
-        empTaxID = sc.next();
-
-        printLineWithSpace();
-
-        System.out.println("Do you have another job/source of income?");
-        secondIncome = sc.next();
-        if (secondIncome.equalsIgnoreCase(positive)) {
-            printLineWithSpace();
-            System.out.println("Enter your additional income for the year of 2022");
-            second = sc.nextDouble();
-        }
-        newIncome = second + income;
-
-        printLineWithSpace();
-
-        taxRate = taxRate(newIncome, status, militaryMember, kids, dependents, positive, negative);
+        double taxRate = taxRate(newIncome, status, militaryMember, kids, dependents, positive, negative);
+        paidTaxes(newIncome,taxRate,student,tuition);
 
     }
+    public static double calculateIncome(Scanner sc) {
+        double income;
+        String secondIncome;
+        String emptaxID="";
+        double newIncome = 0.0;
+        String employer="";
 
+        do {
+            System.out.println("Please enter your income for the year of 2022:");
+            income = sc.nextDouble();
+            sc.nextLine();
+            System.out.println("Please enter the name of your employer: ");
+            employer = sc.nextLine();
+            System.out.println("Please enter your employer's tax ID number: ");
+            emptaxID = sc.nextLine();
+            System.out.println("Do you have another job/source of income?(Yes/No)");
+            secondIncome = sc.nextLine();
+            newIncome = newIncome + income;
+        }
+        while (secondIncome.equalsIgnoreCase("yes"));
+
+        System.out.println("Your total income for the year of 2022 is $" + newIncome);
+        return newIncome;
+    }
     static double taxRate(double newIncome, String status, String militaryMember, int kids, int dependents, String positive, String negative) {
 
         double taxCreditSingle0 = 17640;
@@ -127,9 +128,7 @@ public class TaxCalculator {
             }
         }
 
-        printLineWithSpace();
-
-        System.out.println("Your total income for the year of 2022 is: " + newIncome);
+        //System.out.println("Your total income for the year of 2022 is: $" + newIncome);
 
         double taxRate = 0.0;
 
@@ -172,12 +171,55 @@ public class TaxCalculator {
         }
         printLineWithSpace();
 
-        System.out.println("Based on your marital status and income, your Tax Rate is: " + taxRate * 100);
+        System.out.println("Based on your marital status and income your Tax Rate is: " + (int)(taxRate * 100)+"%");
         return taxRate;
     }
-
+    static void paidTaxes(double income, double taxRate, String isStudent, double tuition){
+        double beforePayingTaxes = income;
+        double taxesPaid = income*taxRate;
+        double afterPayingTaxes = beforePayingTaxes-taxesPaid;
+        double reimbursement = 0.0;
+        if(isStudent.equals("yes")){
+            reimbursement= tuition;
+            afterPayingTaxes+=reimbursement;
+        }
+        System.out.println("Taxes paid = $"+taxesPaid);
+        System.out.println("Your reimbursement = $"+reimbursement);
+        System.out.println("Total kept income = $"+afterPayingTaxes);
+    }
 
     static void printLineWithSpace() {
         System.out.println(" ");
     }
+    /*       double newIncome = 0.0;
+        String secondIncome = "";
+        String empTaxID = "";
+        double second = 0.0;
+        double newIncome = 0.0;
+        String employer = "";
+
+        System.out.println("Please enter your income for the year of 2022");
+        income = sc.nextDouble();
+
+        printLineWithSpace();
+
+        System.out.println("Please enter the name of your employer: ");
+        employer = sc.next();
+
+        printLineWithSpace();
+
+        System.out.println("Please enter your employer's tax ID number: ");
+        empTaxID = sc.next();
+
+        printLineWithSpace();
+
+        System.out.println("Do you have another job/source of income?");
+        secondIncome = sc.next();
+        if (secondIncome.equalsIgnoreCase(positive)) {
+            printLineWithSpace();
+            System.out.println("Enter your additional income for the year of 2022");
+            second = sc.nextDouble();
+        }
+        newIncome = second + income;
+*/
 }
