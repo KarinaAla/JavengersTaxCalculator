@@ -62,20 +62,20 @@ public class TaxCalculator {
         }
 
         printLineWithSpace();
-        double newIncome= calculateIncome(sc);
+        double newIncome = calculateIncome(sc);
 
         printLineWithSpace();
 
         double taxRate = taxRate(newIncome, status, militaryMember, kids, dependents, positive, negative);
-        paidTaxes(newIncome,taxRate,student,tuition);
+        paidTaxes(newIncome, taxRate, student, tuition);
 
     }
     public static double calculateIncome(Scanner sc) {
         double income;
         String secondIncome;
-        String emptaxID="";
+        String emptaxID = "";
         double newIncome = 0.0;
-        String employer="";
+        String employer = "";
 
         do {
             System.out.println("Please enter your income for the year of 2022:");
@@ -171,21 +171,21 @@ public class TaxCalculator {
         }
         printLineWithSpace();
 
-        System.out.println("Based on your marital status and income your Tax Rate is: " + (int)(taxRate * 100)+"%");
+        System.out.println("Based on your marital status and income your Tax Rate is: " + (int) (taxRate * 100) + "%");
         return taxRate;
     }
-    static void paidTaxes(double income, double taxRate, String isStudent, double tuition){
+    static void paidTaxes(double income, double taxRate, String isStudent, double tuition) {
         double beforePayingTaxes = income;
-        double taxesPaid = income*taxRate;
-        double afterPayingTaxes = beforePayingTaxes-taxesPaid;
+        double taxesPaid = income * taxRate;
+        double afterPayingTaxes = beforePayingTaxes - taxesPaid;
         double reimbursement = 0.0;
-        if(isStudent.equals("yes")){
-            reimbursement= tuition;
-            afterPayingTaxes+=reimbursement;
+        if (isStudent.equals("yes")) {
+            reimbursement = tuition;
+            afterPayingTaxes += reimbursement;
         }
-        System.out.println("Taxes paid = $"+taxesPaid);
-        System.out.println("Your reimbursement = $"+reimbursement);
-        System.out.println("Total kept income = $"+afterPayingTaxes);
+        System.out.println("Taxes paid = $" + taxesPaid);
+        System.out.println("Your reimbursement = $" + reimbursement);
+        System.out.println("Total kept income = $" + afterPayingTaxes);
     }
 
     static void printLineWithSpace() {
@@ -222,4 +222,15 @@ public class TaxCalculator {
         }
         newIncome = second + income;
 */
+
+
+static void Persentage() {
+    System.out.println("Please enter the number of kids:");
+    Scanner sc = new Scanner(System.in);
+    int kids = sc.nextInt();
+    double sum= 100 - kids *0.5;
+
+    System.out.println("You have to pay "+ sum + " % of the whole amount");
+}
+
 }
