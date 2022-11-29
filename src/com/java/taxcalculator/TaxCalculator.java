@@ -23,14 +23,14 @@ public class TaxCalculator {
         printLineWithSpace();
 
         System.out.println("Are you an active duty military member? (Yes/No)");
-        String militaryMember = sc.nextLine();
+        String militaryMember = CheckingAnswer(sc);
         if (militaryMember.equalsIgnoreCase(positive)) {
             System.out.println("!! Please include your Military Tax Exemption Certificate. !!");
         }
         printLineWithSpace();
 
         System.out.println("Are you a full-time student in college/university? (Yes/No)");
-        String student = sc.nextLine();
+        String student = CheckingAnswer(sc);
         double tuition = 0.0;
         if (student.equalsIgnoreCase(positive)) {
             System.out.println("Enter the annual tuition fee:");
@@ -40,10 +40,10 @@ public class TaxCalculator {
 
         printLineWithSpace();
         System.out.println("Are you filing as single? (Yes/No):");
-        String status = sc.nextLine();
+        String status = CheckingAnswer(sc);
         printLineWithSpace();
         System.out.println("Do you have children under 18? (Yes/No):");
-        String hasKids = sc.nextLine();
+        String hasKids = CheckingAnswer (sc);
         int kids = 0;
         if (hasKids.equalsIgnoreCase(positive)) {
             System.out.println("Please enter the number of kids:");
@@ -53,7 +53,7 @@ public class TaxCalculator {
 
         printLineWithSpace();
         System.out.println("Do you have any dependents? (Yes/No): ");
-        String hasDependents = sc.nextLine();
+        String hasDependents = CheckingAnswer(sc);
         int dependents = 0;
         if (hasDependents.equalsIgnoreCase(positive)) {
             System.out.println("Please enter the number of dependents: ");
@@ -69,6 +69,16 @@ public class TaxCalculator {
         double taxRate = taxRate(newIncome, status, militaryMember, kids, dependents, positive, negative);
         paidTaxes(newIncome, taxRate, student, tuition);
 
+    }
+    public static String CheckingAnswer (Scanner sc){
+        String answer = sc.nextLine();
+        while (!(answer.equalsIgnoreCase("Yes") || answer.equalsIgnoreCase("No"))){
+            System.out.println("Your input is wrong, please enter YES or NO");
+            answer = sc.nextLine();
+        }
+
+
+        return answer;
     }
     public static double calculateIncome(Scanner sc) {
         double income;
