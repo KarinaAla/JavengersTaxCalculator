@@ -19,10 +19,11 @@ public class TaxCalculator {
         printLineWithSpace();
 
         System.out.println("Enter your tax ID:");
-        String taxID = sc.nextLine();
+        int taxID = checkInt(sc);
         printLineWithSpace();
 
         System.out.println("Are you an active duty military member? (Yes/No)");
+
         String militaryMember = CheckingAnswer(sc);
         if (militaryMember.equalsIgnoreCase(positive)) {
             System.out.println("!! Please include your Military Tax Exemption Certificate. !!");
@@ -34,8 +35,7 @@ public class TaxCalculator {
         double tuition = 0.0;
         if (student.equalsIgnoreCase(positive)) {
             System.out.println("Enter the annual tuition fee:");
-            tuition = sc.nextDouble();
-            sc.nextLine();
+            tuition = checkDouble(sc);
         }
 
         printLineWithSpace();
@@ -47,8 +47,7 @@ public class TaxCalculator {
         int kids = 0;
         if (hasKids.equalsIgnoreCase(positive)) {
             System.out.println("Please enter the number of kids:");
-            kids = sc.nextInt();
-            sc.nextLine();
+            kids = checkInt(sc);
         }
 
         printLineWithSpace();
@@ -57,8 +56,7 @@ public class TaxCalculator {
         int dependents = 0;
         if (hasDependents.equalsIgnoreCase(positive)) {
             System.out.println("Please enter the number of dependents: ");
-            dependents = sc.nextInt();
-            sc.nextLine();
+            dependents = checkInt(sc);
         }
 
         printLineWithSpace();
@@ -70,29 +68,20 @@ public class TaxCalculator {
         paidTaxes(newIncome, taxRate, student, tuition);
 
     }
-    public static String CheckingAnswer (Scanner sc){
-        String answer = sc.nextLine();
-        while (!(answer.equalsIgnoreCase("yes") || answer.equalsIgnoreCase("no"))){
-            System.out.println("Your input is incorrect! Please enter YES or NO:");
-            answer = sc.nextLine();
-        }
-        return answer;
-    }
     public static double calculateIncome(Scanner sc) {
         double income;
         String secondIncome;
-        String emptaxID = "";
+        int emptaxID;
         double newIncome = 0.0;
         String employer = "";
 
         do {
             System.out.println("Please enter your income for the year of 2022:");
-            income = sc.nextDouble();
-            sc.nextLine();
+            income = checkDouble(sc);
             System.out.println("Please enter the name of your employer: ");
             employer = sc.nextLine();
             System.out.println("Please enter your employer's tax ID number: ");
-            emptaxID = sc.nextLine();
+            emptaxID = checkInt(sc);
             System.out.println("Do you have another job/source of income?(Yes/No)");
             secondIncome = CheckingAnswer(sc);
             newIncome = newIncome + income;
@@ -188,7 +177,7 @@ public class TaxCalculator {
         double afterPayingTaxes = beforePayingTaxes - taxesPaid;
         double reimbursement = 0.0;
         if (isStudent.equals("yes")) {
-            reimbursement = tuition;
+            reimbursement = tuition*0.1;
             afterPayingTaxes += reimbursement;
         }
         System.out.println("\nTaxes paid = $" + taxesPaid);
@@ -204,6 +193,48 @@ public class TaxCalculator {
         double persentage = kids*0.005;
         System.out.println("Based on the number of kids you have, your tax \"discount\" is "+ (int)(persentage*100)+ "%");
         return persentage;
+    }
+    public static String CheckingAnswer (Scanner sc){
+        String answer = sc.nextLine();
+        while (!(answer.equalsIgnoreCase("yes") || answer.equalsIgnoreCase("no"))){
+            System.out.println("Your input is incorrect! Please enter YES or NO:");
+            answer = sc.nextLine();
+        }
+        return answer;
+    }
+    public static int checkInt(Scanner sc){
+        String intStr = sc.nextLine();
+        while(!isInteger(intStr)){
+            intStr = sc.nextLine();
+        }
+        return Integer.parseInt(intStr);
+    }
+    public static double checkDouble(Scanner sc){
+        String intStr = sc.nextLine();
+        while(!isDouble(intStr)){
+            intStr = sc.nextLine();
+        }
+        return Double.parseDouble(intStr);
+    }
+    public static boolean isDouble( String str ) {
+        try {
+            Double.parseDouble(str);
+            return true;
+        }
+        catch( Exception e ) {
+            System.out.println("Incorrect input! Please input only numbers:");
+            return false;
+        }
+    }
+    public static boolean isInteger( String str ) {
+        try {
+            Integer.parseInt(str);
+            return true;
+        }
+        catch( Exception e ) {
+            System.out.println("Incorrect input! Please input only numbers:");
+            return false;
+        }
     }
 
 }
