@@ -72,12 +72,10 @@ public class TaxCalculator {
     }
     public static String CheckingAnswer (Scanner sc){
         String answer = sc.nextLine();
-        while (!(answer.equalsIgnoreCase("Yes") || answer.equalsIgnoreCase("No"))){
-            System.out.println("Your input is wrong, please enter YES or NO");
+        while (!(answer.equalsIgnoreCase("yes") || answer.equalsIgnoreCase("no"))){
+            System.out.println("Your input is incorrect! Please enter YES or NO:");
             answer = sc.nextLine();
         }
-
-
         return answer;
     }
     public static double calculateIncome(Scanner sc) {
@@ -96,7 +94,7 @@ public class TaxCalculator {
             System.out.println("Please enter your employer's tax ID number: ");
             emptaxID = sc.nextLine();
             System.out.println("Do you have another job/source of income?(Yes/No)");
-            secondIncome = sc.nextLine();
+            secondIncome = CheckingAnswer(sc);
             newIncome = newIncome + income;
         }
         while (secondIncome.equalsIgnoreCase("yes"));
