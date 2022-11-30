@@ -11,7 +11,8 @@ public class TaxCalculator {
         String negative = "no";
 
         System.out.println("Enter your full name:");
-        String name = sc.nextLine();
+        String name=checkName(sc);
+
         printLineWithSpace();
 
         System.out.println("Enter your address:");
@@ -79,7 +80,7 @@ public class TaxCalculator {
             System.out.println("Please enter your income for the year of 2022:");
             income = checkDouble(sc);
             System.out.println("Please enter the name of your employer: ");
-            employer = sc.nextLine();
+            employer = checkName(sc);
             System.out.println("Please enter your employer's tax ID number: ");
             emptaxID = checkInt(sc);
             System.out.println("Do you have another job/source of income?(Yes/No)");
@@ -236,5 +237,26 @@ public class TaxCalculator {
             return false;
         }
     }
-
+    static boolean isAlphabetical(String name){
+        int count=0;
+        char[] ch = name.toCharArray();
+        for (char c : ch) {
+            if (Character.isAlphabetic(c) || Character.isWhitespace(c)) {
+                count++;
+            }
+        }
+        if(name.length()==count){
+            return true;
+        }else{
+            System.out.println("You have entered unsupported characters or digits. Please try again.");
+            return false;
+        }
+    }
+    static String checkName(Scanner sc){
+        String name = sc.nextLine();
+        while(!isAlphabetical(name)) {
+            name=sc.nextLine();
+        }
+        return name;
+    }
 }
